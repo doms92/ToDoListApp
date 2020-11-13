@@ -3,6 +3,6 @@
         "removeComments": true,
         "outDir": "js",    // Foolder that the JS will be output to
         "target": "es5",
-        "watch": true
+        "watch": true //
     }
 }
