@@ -21,8 +21,14 @@ item.isCompleted = false;
 window.onload = function(){
     let addItem = document.getElementById("add");
     addItem.onclick = main;
-}
 
+    loadSavedItem();
+}
+function loadSavedItem(){
+    let item = getToDo(); // read from storage
+    displayToDoItem(item);
+
+}
 function main(){
     if(isValid()){
         let item = getToDoItem();
@@ -69,8 +75,10 @@ function displayToDoItem(item:ToDoItem):void{
     itemText.innerText = item.title;
 
     let itemDate = document.createElement("p");
-    itemDate.innerText = item.dueDate.toDateString();
-// ex.
+ //   itemDate.innerText = item.dueDate.toDateString();
+    let dueDate = new Date(item.dueDate.toString());
+    itemDate.innerText = dueDate.toDateString();
+ // ex.
     let itemDiv = document.createElement("div");
 
     itemDiv.onclick = markAsComplete;
@@ -102,3 +110,21 @@ function markAsComplete(){
 }
 
 // Task: Allow user to mark a ToDoItem as completed
+
+function saveToDo(item:ToDoItem):void{
+
+    let itemString = JSON.stringify(item);
+
+    localStorage.setItem(todokey, itemString);
+}
+const todokey = "todo";
+/**
+ * Check form data is valid
+ */
+
+function getToDo():ToDoItem{
+    let itemString = localStorage.getItem(todokey);
+    let item:ToDoItem = JSON.parse(itemString);
+    return item;
+
+}

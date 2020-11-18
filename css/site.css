@@ -30,3 +30,12 @@
     border: .1em solid black;
     margin-bottom: 1em;
 }
+
+#complete-items,
+#incomplete-items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
