@@ -22,13 +22,16 @@ window.onload = function(){
     let addItem = document.getElementById("add");
     addItem.onclick = main;
 
-    loadSavedItem();
+    loadSavedItems();
 }
-function loadSavedItem(){
-    let item = getToDo(); // read from storage
-    displayToDoItem(item);
+function loadSavedItems(){
+    let itemArray = getToDoItems(); // read from storage
+    for(let i = 0; i < itemArray.length; i++){
+        let currItem = itemArray[i];
+    displayToDoItem(currItem);
+    }
+}
 
-}
 function main(){
     if(isValid()){
         let item = getToDoItem();
@@ -112,19 +115,24 @@ function markAsComplete(){
 // Task: Allow user to mark a ToDoItem as completed
 
 function saveToDo(item:ToDoItem):void{
+    let currItems = getToDoItems();
+    if(currItems == null){
+        currItems = new Array();
+    }
+    currItems.push(item); // Add the new item to the curr item list
 
-    let itemString = JSON.stringify(item);
-
-    localStorage.setItem(todokey, itemString);
+    let currItemsString = JSON.stringify(currItems);
+    localStorage.setItem(todokey, currItemsString);
 }
 const todokey = "todo";
 /**
  * Check form data is valid
  */
 
-function getToDo():ToDoItem{
+function getToDoItems():ToDoItem[]{
     let itemString = localStorage.getItem(todokey);
-    let item:ToDoItem = JSON.parse(itemString);
+    let item:ToDoItem[] = JSON.parse(itemString);
     return item;
 
 }
+

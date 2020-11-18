@@ -23,7 +23,8 @@
 }
 
 #complete-items{
-    border: 2em solid blue;
+    border: .2em solid blue;
+    margin-bottom: 1em;
 }
 
 #incomplete-items{
@@ -38,4 +39,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
+}
+
+body {
+    background-color: lightslategray;
 }
